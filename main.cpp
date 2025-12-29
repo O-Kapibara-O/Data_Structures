@@ -14,7 +14,7 @@ int main() {
 	testLinkedList();
 	testDoublyLinkedList();
 	testBStree();
-
+	system("pause");
 	return 0;
 }
 void testLinkedList() {
