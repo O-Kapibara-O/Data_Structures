@@ -28,7 +28,51 @@ Linked_List::Linked_List() {
 }
 Linked_List::~Linked_List() {
 	clear_list();
-};
+}
+Linked_List::Linked_List(const Linked_List& source) {
+	if (source.Head == nullptr) {
+		this->Head = nullptr;
+	}
+	else {
+		this->Head = createNewNode(source.Head->getValue());
+
+		Node* tempSource = source.Head->getNextNode();;
+		Node* tempThis = this->Head;
+
+		while (tempSource != nullptr) {
+			tempThis->setNextNode(createNewNode(tempSource->getValue()));
+			tempSource = tempSource->getNextNode();
+			tempThis = tempThis->getNextNode();
+		}
+	}
+}
+Linked_List& Linked_List::operator=(const Linked_List& source) {
+
+	if (this == &source) {
+		return *this;
+	}
+	Node* temp = this->Head;
+	while (temp != nullptr) {
+		Node* helper = temp->getNextNode();
+		delete temp;
+		temp = helper;
+	}
+	this->Head = nullptr;
+	if (source.Head == nullptr) {
+		return *this;
+	}
+	this->Head = createNewNode(source.Head->getValue());
+
+	Node* tempSource = source.Head->getNextNode();;
+	Node* tempThis = this->Head;
+
+	while (tempSource != nullptr) {
+		tempThis->setNextNode(createNewNode(tempSource->getValue()));
+		tempSource = tempSource->getNextNode();
+		tempThis = tempThis->getNextNode();
+	}
+	return *this;
+}
 Node* Linked_List::createNewNode(int _value) {
 	Node* newNode = new Node(_value);
 	return newNode;

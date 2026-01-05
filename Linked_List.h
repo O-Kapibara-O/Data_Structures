@@ -22,6 +22,8 @@ namespace singly {
 	public:
 		Linked_List();
 		~Linked_List();
+		Linked_List(const Linked_List& source);
+		Linked_List& operator=(const Linked_List& source);
 		void push_front(int _value);
 		void push_back(int _value);
 		void pop_front();
